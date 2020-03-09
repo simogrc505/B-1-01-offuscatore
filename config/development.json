@@ -1,0 +1,20 @@
+{
+  "db": {
+    "host": "mongodb://db:27017/app",
+    "options": {
+      "useNewUrlParser": true,
+      "useFindAndModify": false
+    }
+  },
+  "endpoints": {
+    "user": ""
+  },
+  "log": {
+    "name": "app",
+    "base": {
+      "env": "dev"
+    },
+    "enabled": true,
+    "level": 20
+  }
+}

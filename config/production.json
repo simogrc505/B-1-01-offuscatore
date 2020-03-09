@@ -1,0 +1,10 @@
+{
+  "db": {
+    "options": {
+      "useNewUrlParser": true,
+      "useFindAndModify": false
+    }
+  },
+  "endpoints": {},
+  "log": {}
+}

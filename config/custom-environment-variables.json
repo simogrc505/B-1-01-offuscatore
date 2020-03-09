@@ -1,0 +1,15 @@
+{
+  "db": {
+    "host": "DB_HOST"
+  },
+  "endpoints": {
+    "user": "ENDPOINT_USER"
+  },
+  "log": {
+    "name": "SERVICE_NAME",
+    "base": {
+      "region": "AWS_REGION",
+      "env": "NODE_ENV"
+    }
+  }
+}
