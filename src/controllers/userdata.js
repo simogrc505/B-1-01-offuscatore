@@ -15,9 +15,6 @@ const {randomEmail,
   randomString} = require('../utilities/index')
 
 const list = (req, res) => {
-  req.user = {
-    role: 'ROLE_USER'
-  }
   repo
     .list(req.query)
     .then(users => {
@@ -45,7 +42,7 @@ const list = (req, res) => {
 let userdata = require('express').Router()
 
 userdata.get('/',
-  // auth(token(me)),
+  auth(token(me)),
   input.validate_userdata_input,
   list
 )
