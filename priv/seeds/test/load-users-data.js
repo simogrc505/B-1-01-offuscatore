@@ -1,11 +1,11 @@
-const Product = require('../../../src/models/user-data')
+const Userdata = require('../../../src/models/user-data')
 
 exports.seed = function () {
   // Deletes ALL existing entries
-  return Product.deleteMany()
+  return Userdata.deleteMany()
     .then(function () {
       // Inserts seed entries
-      return Product.create([
+      return Userdata.create([
         {
           '_id': '1',
           'firstname': 'Simona',

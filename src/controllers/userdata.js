@@ -2,11 +2,14 @@ const repo = require('../models/repo/users-data')
 const input = require('../input-filters/userdata')
 const error = require('../views/error')
 const view = require('../views/userdata')
+const { mergeDeepLeft, compose, assoc, tap, prop } = require('ramda')
+
 
 // AUTH
 const auth = require('@wdalmut/mini-auth')
 const token = require('@wdalmut/token-auth')
 const me = require('../microservices/auth')
+const { create_filters, append_headers } = require('../utilities/pagination')
 
 // UTILITIES
 const {randomEmail,
@@ -15,8 +18,19 @@ const {randomEmail,
   randomString} = require('../utilities/index')
 
 const list = (req, res) => {
+  let params = compose(
+    mergeDeepLeft(req.query),
+    assoc('page', 1),
+    assoc('limit', 25),
+    assoc('orderBy', '_id'),
+    assoc('order', 'ASC')
+  )({})
+
   repo
-    .list(req.query)
+    .list(params)
+    .then(create_filters(params))// ASSOC OFFSET E LIMIT AL RISULTATO DA PASSARE AD APPEND HEADERS(PER SETTARE I VARI CUSTOM HEADERS)
+    .then(tap(append_headers(res)))
+    .then(prop('docs'))
     .then(users => {
       if (req.user.role === 'ROLE_ADMIN') {
         return res.status(200).json(view.many(users))
